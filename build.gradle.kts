@@ -14,6 +14,7 @@ val mskIamVersion = "1.1.5"
 plugins {
     id("java")
     kotlin("jvm") version "1.7.21"
+    id("org.sonarqube") version "3.5.0.2730"
     kotlin("plugin.spring") version "1.7.21" apply (false)
     id("org.springframework.boot") version "2.7.5" apply (false)
     id("io.spring.dependency-management") version "1.1.0" apply (false)
@@ -49,12 +50,21 @@ allprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+
+    sonarqube {
+        properties {
+            property("sonar.projectKey", "ivyxjc_jvm-lang-tutorial")
+            property("sonar.organization", "ivyxjc")
+            property("sonar.host.url", "https://sonarcloud.io")
+            property(
+                "sonar.coverage.exclusions",
+                "**/*Model.java,**/*Entity.java"
+            )
+        }
+    }
 }
 
 project(":kafka:demo") {
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-
     dependencies {
         implementation("org.apache.logging.log4j:log4j-slf4j2-impl:$log4jSlf4j2Version")
 

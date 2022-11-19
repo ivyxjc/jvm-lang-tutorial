@@ -1,4 +1,4 @@
-package com.ivyxjc.tutorial.kafkademo
+package com.ivyxjc.tutorial.kafka.demo
 
 
 import org.apache.kafka.clients.producer.KafkaProducer
